@@ -61,7 +61,8 @@ export class ArtistsService {
       const artistIdInFavs = this.db.favorites.artists.findIndex(
         (item) => item === id,
       );
-      this.db.favorites.artists.splice(artistIdInFavs, 1);
+      if (artistIdInFavs !== -1)
+        this.db.favorites.artists.splice(artistIdInFavs, 1);
     }
   }
 }

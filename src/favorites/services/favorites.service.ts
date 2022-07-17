@@ -9,7 +9,7 @@ import InMemoryDB from '../../db/db.service';
 export class FavoritesService {
   constructor(public db: InMemoryDB) {}
 
-  async findAll() {
+  findAll() {
     const respnose = {
       artists: this.db.favorites.artists.map((artistId) => {
         const artist = this.db.artists.find((artist) => artist.id === artistId);
@@ -27,14 +27,14 @@ export class FavoritesService {
     return respnose;
   }
 
-  async addTrack(id: string) {
+  addTrack(id: string) {
     const item = this.db.tracks.find((item) => item.id === id);
     if (!item) throw new UnprocessableEntityException(`Track doesn't exist`);
     this.db.favorites.tracks.push(id);
     return 'Track was successfully added to favorites';
   }
 
-  async removeTrack(id: string) {
+  removeTrack(id: string) {
     const index: number = this.db.favorites.tracks.findIndex(
       (item) => item === id,
     );
@@ -46,14 +46,14 @@ export class FavoritesService {
     }
   }
 
-  async addAlbum(id: string) {
+  addAlbum(id: string) {
     const item = this.db.albums.find((item) => item.id === id);
     if (!item) throw new UnprocessableEntityException(`Album doesn't exist`);
     this.db.favorites.albums.push(id);
     return 'Album was successfully added to favorites';
   }
 
-  async removeAlbum(id: string) {
+  removeAlbum(id: string) {
     const index: number = this.db.favorites.albums.findIndex(
       (item) => item === id,
     );
@@ -65,14 +65,14 @@ export class FavoritesService {
     }
   }
 
-  async addArtist(id: string) {
+  addArtist(id: string) {
     const item = this.db.artists.find((item) => item.id === id);
     if (!item) throw new UnprocessableEntityException(`Artist doesn't exist`);
     this.db.favorites.artists.push(id);
     return 'Artist was successfully added to favorites';
   }
 
-  async removeArtist(id: string) {
+  removeArtist(id: string) {
     const index: number = this.db.favorites.artists.findIndex(
       (item) => item === id,
     );

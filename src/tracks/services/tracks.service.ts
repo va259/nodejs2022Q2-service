@@ -51,7 +51,8 @@ export class TracksService {
       const trackIdInFavs = this.db.favorites.tracks.findIndex(
         (track) => track === id,
       );
-      this.db.favorites.tracks.splice(trackIdInFavs, 1);
+      if (trackIdInFavs !== -1)
+        this.db.favorites.tracks.splice(trackIdInFavs, 1);
     }
   }
 }
