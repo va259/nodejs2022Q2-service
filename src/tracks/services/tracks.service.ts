@@ -42,11 +42,16 @@ export class TracksService {
   }
 
   async remove(id: string) {
-    const index: number = this.db.tracks.findIndex((t) => t.id === id);
+    const index: number = this.db.tracks.findIndex((track) => track.id === id);
     if (index === -1) {
       throw new NotFoundException('Track not found');
     } else {
       this.db.tracks.splice(index, 1);
+
+      const trackIdInFavs = this.db.favorites.tracks.findIndex(
+        (track) => track === id,
+      );
+      this.db.favorites.tracks.splice(trackIdInFavs, 1);
     }
   }
 }

@@ -8,7 +8,6 @@ import { Album } from '../entities/album.entity';
 @Injectable()
 export class AlbumsService {
   constructor(public db: InMemoryDB) {}
-  // private albums: Array<Album> = [];
 
   async findAll() {
     return this.db.albums;
@@ -47,9 +46,15 @@ export class AlbumsService {
       throw new NotFoundException('Album not found');
     } else {
       this.db.albums.splice(index, 1);
+
       this.db.tracks.map((track) => {
         if (track.albumId === id) track.albumId = null;
       });
+
+      const albumIdInFavs = this.db.favorites.albums.findIndex(
+        (item) => item === id,
+      );
+      this.db.favorites.albums.splice(albumIdInFavs, 1);
     }
   }
 }

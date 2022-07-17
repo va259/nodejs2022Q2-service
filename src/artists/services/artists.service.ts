@@ -52,10 +52,16 @@ export class ArtistsService {
       throw new NotFoundException('Artist not found');
     } else {
       this.db.artists.splice(index, 1);
+
       this.db.tracks.map((track) => {
         if (track.albumId === id) track.albumId = null;
         if (track.artistId === id) track.artistId = null;
       });
+
+      const artistIdInFavs = this.db.favorites.artists.findIndex(
+        (item) => item === id,
+      );
+      this.db.favorites.artists.splice(artistIdInFavs, 1);
     }
   }
 }
