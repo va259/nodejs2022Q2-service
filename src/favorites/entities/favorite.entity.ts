@@ -11,3 +11,13 @@ export class Favorites {
     Object.assign(this, partial);
   }
 }
+
+export class FavoritesRepsonse {
+  artists: Artist[];
+  albums: Album[];
+  tracks: Track[];
+
+  constructor(partial: Partial<FavoritesRepsonse>) {
+    Object.assign(this, partial);
+  }
+}

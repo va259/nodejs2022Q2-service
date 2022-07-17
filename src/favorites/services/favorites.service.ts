@@ -10,7 +10,6 @@ export class FavoritesService {
   constructor(public db: InMemoryDB) {}
 
   async findAll() {
-    // const respnose = this.db.favorites;
     const respnose = {
       artists: this.db.favorites.artists.map((artistId) => {
         const artist = this.db.artists.find((artist) => artist.id === artistId);
@@ -25,7 +24,6 @@ export class FavoritesService {
         return track;
       }),
     };
-    console.log(respnose);
     return respnose;
   }
 
@@ -33,7 +31,6 @@ export class FavoritesService {
     const item = this.db.tracks.find((item) => item.id === id);
     if (!item) throw new UnprocessableEntityException(`Track doesn't exist`);
     this.db.favorites.tracks.push(id);
-    // console.log('track should be added to favs:', this.db);
     return 'Track was successfully added to favorites';
   }
 
@@ -45,7 +42,6 @@ export class FavoritesService {
       throw new NotFoundException('Track is not in favorites');
     } else {
       this.db.favorites.tracks.splice(index, 1);
-      // console.log('track should be removed from favs:', this.db);
       return 'Track was successfully removed from favorites';
     }
   }
@@ -54,7 +50,6 @@ export class FavoritesService {
     const item = this.db.albums.find((item) => item.id === id);
     if (!item) throw new UnprocessableEntityException(`Album doesn't exist`);
     this.db.favorites.albums.push(id);
-    // console.log('track should be added to favs:', this.db);
     return 'Album was successfully added to favorites';
   }
 
@@ -66,7 +61,6 @@ export class FavoritesService {
       throw new NotFoundException('Album is not in favorites');
     } else {
       this.db.favorites.albums.splice(index, 1);
-      // console.log('track should be removed from favs:', this.db);
       return 'Album was successfully removed from favorites';
     }
   }
@@ -75,7 +69,6 @@ export class FavoritesService {
     const item = this.db.artists.find((item) => item.id === id);
     if (!item) throw new UnprocessableEntityException(`Artist doesn't exist`);
     this.db.favorites.artists.push(id);
-    // console.log('track should be added to favs:', this.db);
     return 'Artist was successfully added to favorites';
   }
 
@@ -87,7 +80,6 @@ export class FavoritesService {
       throw new NotFoundException('Artist is not in favorites');
     } else {
       this.db.favorites.artists.splice(index, 1);
-      // console.log('track should be removed from favs:', this.db);
       return 'Artist was successfully removed from favorites';
     }
   }
