@@ -6,4 +6,3 @@ COPY *.sql /docker-entrypoint-initdb.d/
 # ENTRYPOINT ["docker-entrypoint.sh"]
 EXPOSE ${POSTGRES_PORT}
 CMD ["postgres", "-c", "logging_collector=on", "-c", "log_statement=mod"]
-# command: postgres -c logging_collector=on
