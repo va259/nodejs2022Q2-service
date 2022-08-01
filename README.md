@@ -1,9 +1,27 @@
 # Home Library Service
 
+## TLDR: How to run the app and db/orm in Docker
+
+```sh
+git clone https://github.com/va259/nodejs2022Q2-service.git
+cd nodejs2022Q2-service
+git checkout orm
+```
+
+rename `.env.example` file to `.env` and continue with commands:
+
+```sh
+npm i
+docker-compose build
+docker-compose up
+npm run migration:run
+```
+
 ## Prerequisites
 
 - Git - [Download & Install Git](https://git-scm.com/downloads).
 - Node.js - [Download & Install Node.js](https://nodejs.org/en/download/) and the npm package manager.
+- Docker - [Download & Install Docker](https://docs.docker.com/get-docker/)
 
 ## Downloading
 
@@ -26,6 +44,12 @@ git checkout dev
 git checkout docker
 ```
 
+- App with connected ORM
+
+```sh
+git checkout orm
+```
+
 ## Installing NPM modules
 
 ```sh
@@ -45,13 +69,13 @@ npm run scan:app
 npm run scan:db
 ```
 
-## Run the app with the db in containers
+## Running application & db in containers
 
 ```sh
 docker-compose up
 ```
 
-## Stop the containers
+## Stop and unmount containers
 
 ```sh
 docker-compose down
@@ -64,7 +88,19 @@ docker pull va259/service
 docker pull va259/db
 ```
 
-## Running application
+## Run DB migrations to create database entities
+
+```sh
+npm run migration:run 
+```
+
+## Generate new migration
+
+```sh
+npm run migration:generate src/db/migration/{name_of_your_migration}
+```
+
+## Running application locally
 
 ```sh
 npm start
